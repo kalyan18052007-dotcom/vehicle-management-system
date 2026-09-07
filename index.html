@@ -1,0 +1,2596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Vehicle Service Management System"
+    >
+
+    <title>AutoCare | Vehicle Service Management</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<!-- ================= LOGIN SCREEN ================= -->
+
+<div id="loginScreen" class="login-screen">
+
+    <div class="login-card">
+
+        <div class="login-logo">
+            🚗
+        </div>
+
+        <h1>AutoCare</h1>
+
+        <p class="login-subtitle">
+            Vehicle Service Management System
+        </p>
+
+        <form id="loginForm">
+
+            <div class="form-group">
+                <label for="loginUsername">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="loginUsername"
+                    name="loginUsername"
+                    placeholder="Enter username"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="loginPassword">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="loginPassword"
+                    name="loginPassword"
+                    placeholder="Enter password"
+                    required
+                >
+            </div>
+
+            <p
+                id="loginError"
+                style="
+                    display:none;
+                    color:#dc2626;
+                    font-size:13px;
+                    margin-bottom:12px;
+                "
+            >
+                Invalid username or password.
+            </p>
+
+            <button
+                type="submit"
+                class="primary-btn"
+                style="width:100%;"
+            >
+                🔐 Login
+            </button>
+
+        </form>
+
+        <p
+            style="
+                text-align:center;
+                margin-top:16px;
+                font-size:12px;
+                color:#94a3b8;
+            "
+        >
+            Demo Login: admin / admin123
+        </p>
+
+    </div>
+
+</div>
+
+<!-- ================= END LOGIN SCREEN ================= -->
+    <!-- =========================================================
+         APP WRAPPER
+    ========================================================== -->
+
+    <div class="app-wrapper">
+
+        <!-- =====================================================
+             SIDEBAR
+        ====================================================== -->
+
+        <aside class="sidebar" id="sidebar">
+
+            <!-- Logo -->
+            <div class="sidebar-logo">
+
+                <div class="logo-icon">
+                    <i class="fa-solid fa-car-side"></i>
+                </div>
+
+                <div class="logo-text">
+                    <h2>Auto<span>Care</span></h2>
+                    <small>Service Management</small>
+                </div>
+
+            </div>
+
+
+            <!-- Navigation -->
+            <nav class="sidebar-nav">
+
+                <p class="nav-title">MAIN MENU</p>
+
+                <a
+                    href="#"
+                    class="nav-link active"
+                    data-section="dashboard"
+                >
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a
+                    href="#"
+                    class="nav-link"
+                    data-section="customers"
+                >
+                    <i class="fa-solid fa-users"></i>
+                    <span>Customers</span>
+                </a>
+
+                <a
+                    href="#"
+                    class="nav-link"
+                    data-section="vehicles"
+                >
+                    <i class="fa-solid fa-car"></i>
+                    <span>Vehicles</span>
+                </a>
+
+                <a
+                    href="#"
+                    class="nav-link"
+                    data-section="services"
+                >
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                    <span>Service Bookings</span>
+                </a>
+
+                <a
+                    href="#"
+                    class="nav-link"
+                    data-section="history"
+                >
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span>Service History</span>
+                </a>
+
+
+                <p class="nav-title">MANAGEMENT</p>
+
+                <a
+                    href="#"
+                    class="nav-link"
+                    data-section="reports"
+                >
+                    <i class="fa-solid fa-chart-column"></i>
+                    <span>Reports</span>
+                </a>
+
+                <a
+                    href="#"
+                    class="nav-link"
+                    data-section="settings"
+                >
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Settings</span>
+                </a>
+                <!-- Logout -->
+<button
+    type="button"
+    class="nav-link logout-link"
+    id="logoutBtn"
+>
+    <i class="fa-solid fa-right-from-bracket"></i>
+    <span>Logout</span>
+</button>
+
+            </nav>
+
+
+            <!-- Sidebar Bottom -->
+            <div class="sidebar-bottom">
+
+                <div class="help-card">
+
+                    <div class="help-icon">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+
+                    <div>
+                        <strong>Need Help?</strong>
+                        <p>Contact support</p>
+                    </div>
+
+                    <button type="button" title="Help">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =====================================================
+             MAIN CONTENT
+        ====================================================== -->
+
+        <main class="main-content">
+
+            <!-- =================================================
+                 TOP HEADER
+            ================================================== -->
+
+            <header class="top-header">
+
+                <div class="header-left">
+
+                    <button
+                        type="button"
+                        class="menu-toggle"
+                        id="menuToggle"
+                        aria-label="Toggle menu"
+                    >
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+
+                    <div class="page-heading">
+                        <h1 id="pageTitle">Dashboard</h1>
+                        <p id="pageSubtitle">
+                            Welcome back! Here's what's happening today.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="header-right">
+
+                    <!-- Search -->
+                    <div class="header-search">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        <input
+                            type="text"
+                            id="globalSearch"
+                            placeholder="Search..."
+                            autocomplete="off"
+                        >
+
+                    </div>
+
+
+                    <!-- Notification -->
+                    <button
+                        type="button"
+                        class="header-icon-btn"
+                        id="notificationBtn"
+                        title="Notifications"
+                    >
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="notification-dot"></span>
+                    </button>
+
+
+                    <!-- User -->
+                    <div class="user-profile">
+
+                        <div class="user-avatar">
+                            <span>AD</span>
+                        </div>
+
+                        <div class="user-info">
+                            <strong>Admin</strong>
+                            <small>Administrator</small>
+                        </div>
+
+                        <i class="fa-solid fa-chevron-down"></i>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- =================================================
+                 PAGE CONTENT
+            ================================================== -->
+
+            <div class="content-area">
+
+
+                <!-- =================================================
+                     DASHBOARD SECTION
+                ================================================== -->
+
+                <section
+                    class="page-section active"
+                    id="dashboardSection"
+                >
+
+                    <!-- Welcome Banner -->
+
+                    <div class="welcome-banner">
+
+                        <div class="welcome-content">
+
+                            <span class="welcome-label">
+                                <i class="fa-solid fa-sparkles"></i>
+                                AUTOCARE MANAGEMENT
+                            </span>
+
+                            <h2>
+                                Keep every vehicle
+                                <span>road-ready.</span>
+                            </h2>
+
+                            <p>
+                                Manage customers, vehicles, service bookings
+                                and service history from one place.
+                            </p>
+
+                            <button
+                                type="button"
+                                class="primary-btn"
+                                id="welcomeBookServiceBtn"
+                            >
+                                <i class="fa-solid fa-plus"></i>
+                                New Service Booking
+                            </button>
+
+                        </div>
+
+
+                        <div class="welcome-illustration">
+
+                            <div class="illustration-circle circle-one"></div>
+                            <div class="illustration-circle circle-two"></div>
+
+                            <i class="fa-solid fa-car-side main-car-icon"></i>
+
+                            <div class="floating-tool tool-one">
+                                <i class="fa-solid fa-wrench"></i>
+                            </div>
+
+                            <div class="floating-tool tool-two">
+                                <i class="fa-solid fa-gear"></i>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Statistics -->
+
+                    <div class="stats-grid">
+
+                        <!-- Customers -->
+
+                        <div class="stat-card">
+
+                            <div class="stat-top">
+
+                                <div class="stat-icon customer-icon">
+                                    <i class="fa-solid fa-users"></i>
+                                </div>
+
+                                <span class="stat-menu">
+                                    <i class="fa-solid fa-ellipsis"></i>
+                                </span>
+
+                            </div>
+
+                            <div class="stat-info">
+
+                                <span>Total Customers</span>
+
+                                <h3 id="totalCustomers">
+                                    0
+                                </h3>
+
+                                <p class="stat-growth positive">
+                                    <i class="fa-solid fa-arrow-up"></i>
+                                    <span id="customerGrowth">0%</span>
+                                    this month
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Vehicles -->
+
+                        <div class="stat-card">
+
+                            <div class="stat-top">
+
+                                <div class="stat-icon vehicle-icon">
+                                    <i class="fa-solid fa-car"></i>
+                                </div>
+
+                                <span class="stat-menu">
+                                    <i class="fa-solid fa-ellipsis"></i>
+                                </span>
+
+                            </div>
+
+                            <div class="stat-info">
+
+                                <span>Total Vehicles</span>
+
+                                <h3 id="totalVehicles">
+                                    0
+                                </h3>
+
+                                <p class="stat-growth positive">
+                                    <i class="fa-solid fa-arrow-up"></i>
+                                    <span id="vehicleGrowth">0%</span>
+                                    this month
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Pending Services -->
+
+                        <div class="stat-card">
+
+                            <div class="stat-top">
+
+                                <div class="stat-icon pending-icon">
+                                    <i class="fa-solid fa-hourglass-half"></i>
+                                </div>
+
+                                <span class="stat-menu">
+                                    <i class="fa-solid fa-ellipsis"></i>
+                                </span>
+
+                            </div>
+
+                            <div class="stat-info">
+
+                                <span>Pending Services</span>
+
+                                <h3 id="pendingServices">
+                                    0
+                                </h3>
+
+                                <p class="stat-growth neutral">
+                                    <i class="fa-solid fa-clock"></i>
+                                    Currently pending
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Completed -->
+
+                        <div class="stat-card">
+
+                            <div class="stat-top">
+
+                                <div class="stat-icon completed-icon">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                </div>
+
+                                <span class="stat-menu">
+                                    <i class="fa-solid fa-ellipsis"></i>
+                                </span>
+
+                            </div>
+
+                            <div class="stat-info">
+
+                                <span>Completed Services</span>
+
+                                <h3 id="completedServices">
+                                    0
+                                </h3>
+
+                                <p class="stat-growth positive">
+                                    <i class="fa-solid fa-check"></i>
+                                    Successfully completed
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Dashboard Grid -->
+
+                    <div class="dashboard-grid">
+
+
+                        <!-- Upcoming Services -->
+
+                        <div class="dashboard-card upcoming-card">
+
+                            <div class="card-header">
+
+                                <div>
+                                    <h3>Upcoming Services</h3>
+                                    <p>Latest scheduled appointments</p>
+                                </div>
+
+                                <button
+                                    type="button"
+                                    class="text-btn"
+                                    data-section="services"
+                                >
+                                    View All
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+
+                            </div>
+
+
+                            <div class="table-wrapper">
+
+                                <table class="data-table">
+
+                                    <thead>
+                                        <tr>
+                                            <th>Customer</th>
+                                            <th>Vehicle</th>
+                                            <th>Service</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody id="upcomingServicesTable">
+
+                                        <tr class="empty-row">
+
+                                            <td colspan="5">
+
+                                                <div class="empty-state small">
+
+                                                    <i class="fa-solid fa-calendar-xmark"></i>
+
+                                                    <p>
+                                                        No upcoming services
+                                                    </p>
+
+                                                </div>
+
+                                            </td>
+
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Quick Actions -->
+
+                        <div class="dashboard-card quick-actions-card">
+
+                            <div class="card-header">
+
+                                <div>
+                                    <h3>Quick Actions</h3>
+                                    <p>Manage your workshop quickly</p>
+                                </div>
+
+                            </div>
+
+
+                            <div class="quick-actions">
+
+                                <button
+                                    type="button"
+                                    class="quick-action"
+                                    id="quickAddCustomer"
+                                >
+
+                                    <div class="quick-action-icon">
+                                        <i class="fa-solid fa-user-plus"></i>
+                                    </div>
+
+                                    <div>
+                                        <strong>Add Customer</strong>
+                                        <span>Register a new customer</span>
+                                    </div>
+
+                                    <i class="fa-solid fa-chevron-right"></i>
+
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    class="quick-action"
+                                    id="quickAddVehicle"
+                                >
+
+                                    <div class="quick-action-icon">
+                                        <i class="fa-solid fa-car-side"></i>
+                                    </div>
+
+                                    <div>
+                                        <strong>Add Vehicle</strong>
+                                        <span>Register a customer vehicle</span>
+                                    </div>
+
+                                    <i class="fa-solid fa-chevron-right"></i>
+
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    class="quick-action"
+                                    id="quickBookService"
+                                >
+
+                                    <div class="quick-action-icon">
+                                        <i class="fa-solid fa-calendar-plus"></i>
+                                    </div>
+
+                                    <div>
+                                        <strong>Book Service</strong>
+                                        <span>Create service appointment</span>
+                                    </div>
+
+                                    <i class="fa-solid fa-chevron-right"></i>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Recent Activity -->
+
+                    <div class="dashboard-card activity-card">
+
+                        <div class="card-header">
+
+                            <div>
+                                <h3>Recent Activity</h3>
+                                <p>Latest system activities</p>
+                            </div>
+
+                            <button
+                                type="button"
+                                class="icon-btn"
+                                id="clearActivityBtn"
+                                title="Clear activity"
+                            >
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            class="activity-list"
+                            id="activityList"
+                        >
+
+                            <div class="empty-state">
+
+                                <div class="empty-icon">
+                                    <i class="fa-solid fa-bolt"></i>
+                                </div>
+
+                                <h4>No recent activity</h4>
+
+                                <p>
+                                    Your recent actions will appear here.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =================================================
+                     CUSTOMERS SECTION
+                ================================================== -->
+
+                <section
+                    class="page-section"
+                    id="customersSection"
+                >
+
+                    <div class="section-toolbar">
+
+                        <div class="section-intro">
+                            <h2>Customers</h2>
+                            <p>
+                                Manage all your workshop customers.
+                            </p>
+                        </div>
+
+                        <button
+                            type="button"
+                            class="primary-btn"
+                            id="addCustomerBtn"
+                        >
+                            <i class="fa-solid fa-plus"></i>
+                            Add Customer
+                        </button>
+
+                    </div>
+
+
+                    <div class="dashboard-card">
+
+                        <div class="card-header">
+
+                            <div>
+                                <h3>Customer Directory</h3>
+                                <p id="customerCountText">
+                                    0 customers registered
+                                </p>
+                            </div>
+
+                            <div class="table-search">
+
+                                <i class="fa-solid fa-magnifying-glass"></i>
+
+                                <input
+                                    type="text"
+                                    id="customerSearch"
+                                    placeholder="Search customers..."
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="table-wrapper">
+
+                            <table class="data-table">
+
+                                <thead>
+
+                                    <tr>
+                                        <th>Customer</th>
+                                        <th>Phone</th>
+                                        <th>Email</th>
+                                        <th>Vehicles</th>
+                                        <th>Joined</th>
+                                        <th>Actions</th>
+                                    </tr>
+
+                                </thead>
+
+                                <tbody id="customersTable">
+
+                                    <tr class="empty-row">
+
+                                        <td colspan="6">
+
+                                            <div class="empty-state">
+
+                                                <div class="empty-icon">
+                                                    <i class="fa-solid fa-users"></i>
+                                                </div>
+
+                                                <h4>No customers yet</h4>
+
+                                                <p>
+                                                    Add your first customer
+                                                    to get started.
+                                                </p>
+
+                                                <button
+                                                    type="button"
+                                                    class="secondary-btn"
+                                                    id="emptyAddCustomerBtn"
+                                                >
+                                                    <i class="fa-solid fa-plus"></i>
+                                                    Add Customer
+                                                </button>
+
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =================================================
+                     VEHICLES SECTION
+                ================================================== -->
+
+                <section
+                    class="page-section"
+                    id="vehiclesSection"
+                >
+
+                    <div class="section-toolbar">
+
+                        <div class="section-intro">
+                            <h2>Vehicles</h2>
+                            <p>
+                                Keep track of all registered vehicles.
+                            </p>
+                        </div>
+
+                        <button
+                            type="button"
+                            class="primary-btn"
+                            id="addVehicleBtn"
+                        >
+                            <i class="fa-solid fa-plus"></i>
+                            Add Vehicle
+                        </button>
+
+                    </div>
+
+
+                    <div class="dashboard-card">
+
+                        <div class="card-header">
+
+                            <div>
+                                <h3>Vehicle Directory</h3>
+                                <p id="vehicleCountText">
+                                    0 vehicles registered
+                                </p>
+                            </div>
+
+                            <div class="table-search">
+
+                                <i class="fa-solid fa-magnifying-glass"></i>
+
+                                <input
+                                    type="text"
+                                    id="vehicleSearch"
+                                    placeholder="Search vehicles..."
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="table-wrapper">
+
+                            <table class="data-table">
+
+                                <thead>
+
+                                    <tr>
+                                        <th>Vehicle</th>
+                                        <th>Registration No.</th>
+                                        <th>Owner</th>
+                                        <th>Year</th>
+                                        <th>Last Service</th>
+                                        <th>Actions</th>
+                                    </tr>
+
+                                </thead>
+
+                                <tbody id="vehiclesTable">
+
+                                    <tr class="empty-row">
+
+                                        <td colspan="6">
+
+                                            <div class="empty-state">
+
+                                                <div class="empty-icon">
+                                                    <i class="fa-solid fa-car"></i>
+                                                </div>
+
+                                                <h4>No vehicles yet</h4>
+
+                                                <p>
+                                                    Register your first vehicle
+                                                    to get started.
+                                                </p>
+
+                                                <button
+                                                    type="button"
+                                                    class="secondary-btn"
+                                                    id="emptyAddVehicleBtn"
+                                                >
+                                                    <i class="fa-solid fa-plus"></i>
+                                                    Add Vehicle
+                                                </button>
+
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =================================================
+                     SERVICES SECTION
+                ================================================== -->
+
+                <section
+                    class="page-section"
+                    id="servicesSection"
+                >
+
+                    <div class="section-toolbar">
+
+                        <div class="section-intro">
+                            <h2>Service Bookings</h2>
+                            <p>
+                                Schedule and manage vehicle services.
+                            </p>
+                        </div>
+
+                        <button
+                            type="button"
+                            class="primary-btn"
+                            id="addServiceBtn"
+                        >
+                            <i class="fa-solid fa-plus"></i>
+                            New Booking
+                        </button>
+
+                    </div>
+
+
+                    <!-- Service Filter -->
+
+                    <div class="filter-bar">
+
+                        <div class="filter-group">
+
+                            <label for="serviceStatusFilter">
+                                Status
+                            </label>
+
+                            <select id="serviceStatusFilter">
+
+                                <option value="all">
+                                    All Services
+                                </option>
+
+                                <option value="booked">
+                                    Booked
+                                </option>
+
+                                <option value="in-service">
+                                    In Service
+                                </option>
+
+                                <option value="completed">
+                                    Completed
+                                </option>
+
+                                <option value="delivered">
+                                    Delivered
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="filter-group">
+
+                            <label for="serviceDateFilter">
+                                Date
+                            </label>
+
+                            <input
+                                type="date"
+                                id="serviceDateFilter"
+                            >
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="secondary-btn"
+                            id="clearServiceFilters"
+                        >
+                            <i class="fa-solid fa-filter-circle-xmark"></i>
+                            Clear Filters
+                        </button>
+
+                    </div>
+
+
+                    <!-- Service Table -->
+
+                    <div class="dashboard-card">
+
+                        <div class="card-header">
+
+                            <div>
+                                <h3>All Service Bookings</h3>
+                                <p id="serviceCountText">
+                                    0 bookings
+                                </p>
+                            </div>
+
+                            <div class="table-search">
+
+                                <i class="fa-solid fa-magnifying-glass"></i>
+
+                                <input
+                                    type="text"
+                                    id="serviceSearch"
+                                    placeholder="Search bookings..."
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="table-wrapper">
+
+                            <table class="data-table">
+
+                                <thead>
+
+                                    <tr>
+                                        <th>Booking ID</th>
+                                        <th>Customer</th>
+                                        <th>Vehicle</th>
+                                        <th>Service</th>
+                                        <th>Date</th>
+                                        <th>Cost</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+
+                                </thead>
+
+                                <tbody id="servicesTable">
+
+                                    <tr class="empty-row">
+
+                                        <td colspan="8">
+
+                                            <div class="empty-state">
+
+                                                <div class="empty-icon">
+                                                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                                                </div>
+
+                                                <h4>No service bookings</h4>
+
+                                                <p>
+                                                    Create a new booking
+                                                    to see it here.
+                                                </p>
+
+                                                <button
+                                                    type="button"
+                                                    class="secondary-btn"
+                                                    id="emptyAddServiceBtn"
+                                                >
+                                                    <i class="fa-solid fa-plus"></i>
+                                                    New Booking
+                                                </button>
+
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =================================================
+                     SERVICE HISTORY SECTION
+                ================================================== -->
+
+                <section
+                    class="page-section"
+                    id="historySection"
+                >
+
+                    <div class="section-toolbar">
+
+                        <div class="section-intro">
+                            <h2>Service History</h2>
+                            <p>
+                                View completed and previous services.
+                            </p>
+                        </div>
+
+                        <button
+                            type="button"
+                            class="secondary-btn"
+                            id="exportHistoryBtn"
+                        >
+                            <i class="fa-solid fa-file-export"></i>
+                            Export
+                        </button>
+
+                    </div>
+
+
+                    <div class="dashboard-card">
+
+                        <div class="card-header">
+
+                            <div>
+                                <h3>Service Records</h3>
+                                <p>
+                                    Complete service history
+                                </p>
+                            </div>
+
+                            <div class="table-search">
+
+                                <i class="fa-solid fa-magnifying-glass"></i>
+
+                                <input
+                                    type="text"
+                                    id="historySearch"
+                                    placeholder="Search history..."
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="table-wrapper">
+
+                            <table class="data-table">
+
+                                <thead>
+
+                                    <tr>
+                                        <th>Booking ID</th>
+                                        <th>Customer</th>
+                                        <th>Vehicle</th>
+                                        <th>Service</th>
+                                        <th>Date</th>
+                                        <th>Cost</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+
+                                </thead>
+
+                                <tbody id="historyTable">
+
+                                    <tr class="empty-row">
+
+                                        <td colspan="8">
+
+                                            <div class="empty-state">
+
+                                                <div class="empty-icon">
+                                                    <i class="fa-solid fa-clock-rotate-left"></i>
+                                                </div>
+
+                                                <h4>No service history</h4>
+
+                                                <p>
+                                                    Completed services will
+                                                    appear here.
+                                                </p>
+
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =================================================
+                     REPORTS SECTION
+                ================================================== -->
+
+                <section
+                    class="page-section"
+                    id="reportsSection"
+                >
+
+                    <div class="section-toolbar">
+
+                        <div class="section-intro">
+                            <h2>Reports</h2>
+                            <p>
+                                View workshop performance information.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="stats-grid">
+
+                        <div class="stat-card report-stat">
+
+                            <div class="stat-top">
+
+                                <div class="stat-icon completed-icon">
+                                    <i class="fa-solid fa-indian-rupee-sign"></i>
+                                </div>
+
+                            </div>
+
+                            <div class="stat-info">
+
+                                <span>Total Revenue</span>
+
+                                <h3 id="totalRevenue">
+                                    ₹0
+                                </h3>
+
+                                <p>
+                                    Based on completed services
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="stat-card report-stat">
+
+                            <div class="stat-top">
+
+                                <div class="stat-icon vehicle-icon">
+                                    <i class="fa-solid fa-car"></i>
+                                </div>
+
+                            </div>
+
+                            <div class="stat-info">
+
+                                <span>Most Serviced Vehicles</span>
+
+                                <h3 id="mostServicedCount">
+                                    0
+                                </h3>
+
+                                <p>
+                                    Total completed jobs
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="stat-card report-stat">
+
+                            <div class="stat-top">
+
+                                <div class="stat-icon customer-icon">
+                                    <i class="fa-solid fa-user-group"></i>
+                                </div>
+
+                            </div>
+
+                            <div class="stat-info">
+
+                                <span>Active Customers</span>
+
+                                <h3 id="activeCustomers">
+                                    0
+                                </h3>
+
+                                <p>
+                                    Customers with services
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="stat-card report-stat">
+
+                            <div class="stat-top">
+
+                                <div class="stat-icon pending-icon">
+                                    <i class="fa-solid fa-list-check"></i>
+                                </div>
+
+                            </div>
+
+                            <div class="stat-info">
+
+                                <span>Total Bookings</span>
+
+                                <h3 id="totalBookings">
+                                    0
+                                </h3>
+
+                                <p>
+                                    All service bookings
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="dashboard-card">
+
+                        <div class="card-header">
+
+                            <div>
+                                <h3>Service Summary</h3>
+                                <p>
+                                    Overview of service statuses
+                                </p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="report-summary">
+
+                            <div class="summary-item">
+
+                                <div class="summary-label">
+                                    <span class="summary-dot booked-dot"></span>
+                                    Booked
+                                </div>
+
+                                <strong id="reportBooked">
+                                    0
+                                </strong>
+
+                            </div>
+
+
+                            <div class="summary-item">
+
+                                <div class="summary-label">
+                                    <span class="summary-dot service-dot"></span>
+                                    In Service
+                                </div>
+
+                                <strong id="reportInService">
+                                    0
+                                </strong>
+
+                            </div>
+
+
+                            <div class="summary-item">
+
+                                <div class="summary-label">
+                                    <span class="summary-dot completed-dot"></span>
+                                    Completed
+                                </div>
+
+                                <strong id="reportCompleted">
+                                    0
+                                </strong>
+
+                            </div>
+
+
+                            <div class="summary-item">
+
+                                <div class="summary-label">
+                                    <span class="summary-dot delivered-dot"></span>
+                                    Delivered
+                                </div>
+
+                                <strong id="reportDelivered">
+                                    0
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =================================================
+                     SETTINGS SECTION
+                ================================================== -->
+
+                <section
+                    class="page-section"
+                    id="settingsSection"
+                >
+
+                    <div class="section-toolbar">
+
+                        <div class="section-intro">
+
+                            <h2>Settings</h2>
+
+                            <p>
+                                Configure your AutoCare system.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="settings-grid">
+
+
+                        <!-- Workshop Settings -->
+
+                        <div class="dashboard-card settings-card">
+
+                            <div class="settings-card-header">
+
+                                <div class="settings-icon">
+                                    <i class="fa-solid fa-building"></i>
+                                </div>
+
+                                <div>
+                                    <h3>Workshop Information</h3>
+                                    <p>
+                                        Basic workshop details
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+                            <form id="workshopSettingsForm">
+
+                                <div class="form-group">
+
+                                    <label for="workshopName">
+                                        Workshop Name
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        id="workshopName"
+                                        placeholder="AutoCare Service Center"
+                                    >
+
+                                </div>
+
+
+                                <div class="form-row">
+
+                                    <div class="form-group">
+
+                                        <label for="workshopPhone">
+                                            Phone
+                                        </label>
+
+                                        <input
+                                            type="tel"
+                                            id="workshopPhone"
+                                            placeholder="+91 XXXXX XXXXX"
+                                        >
+
+                                    </div>
+
+
+                                    <div class="form-group">
+
+                                        <label for="workshopEmail">
+                                            Email
+                                        </label>
+
+                                        <input
+                                            type="email"
+                                            id="workshopEmail"
+                                            placeholder="service@example.com"
+                                        >
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="form-group">
+
+                                    <label for="workshopAddress">
+                                        Address
+                                    </label>
+
+                                    <textarea
+                                        id="workshopAddress"
+                                        rows="3"
+                                        placeholder="Workshop address"
+                                    ></textarea>
+
+                                </div>
+
+
+                                <button
+                                    type="submit"
+                                    class="primary-btn"
+                                >
+                                    <i class="fa-solid fa-save"></i>
+                                    Save Changes
+                                </button>
+
+                            </form>
+
+                        </div>
+
+
+                        <!-- Data Settings -->
+
+                        <div class="dashboard-card settings-card">
+
+                            <div class="settings-card-header">
+
+                                <div class="settings-icon">
+                                    <i class="fa-solid fa-database"></i>
+                                </div>
+
+                                <div>
+                                    <h3>Local Data</h3>
+                                    <p>
+                                        Manage browser stored data
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+                            <div class="data-management">
+
+                                <div class="data-info">
+
+                                    <div class="data-status-icon">
+                                        <i class="fa-solid fa-hard-drive"></i>
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Browser Storage
+                                        </strong>
+
+                                        <p>
+                                            Your data is stored locally
+                                            in this browser.
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+
+                                <button
+                                    type="button"
+                                    class="danger-btn"
+                                    id="clearAllDataBtn"
+                                >
+                                    <i class="fa-solid fa-trash-can"></i>
+                                    Clear All Data
+                                </button>
+
+                            </div>
+
+
+                            <div class="storage-note">
+
+                                <i class="fa-solid fa-circle-info"></i>
+
+                                <p>
+                                    Clearing data will permanently remove
+                                    customers, vehicles and service records
+                                    from this browser.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+
+            <!-- =================================================
+                 FOOTER
+            ================================================== -->
+
+            <footer class="app-footer">
+
+                <p>
+                    © <span id="currentYear"></span>
+                    AutoCare Vehicle Service Management System
+                </p>
+
+                <div class="footer-links">
+
+                    <span>
+                        <i class="fa-solid fa-shield-halved"></i>
+                        Local Data
+                    </span>
+
+                    <span>
+                        <i class="fa-solid fa-circle"></i>
+                        System Active
+                    </span>
+
+                </div>
+
+            </footer>
+
+        </main>
+
+    </div>
+
+
+
+    <!-- =========================================================
+         CUSTOMER MODAL
+    ========================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="customerModal"
+        aria-hidden="true"
+    >
+
+        <div class="modal">
+
+            <div class="modal-header">
+
+                <div>
+
+                    <div class="modal-icon customer-modal-icon">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </div>
+
+                    <div>
+                        <h3 id="customerModalTitle">
+                            Add Customer
+                        </h3>
+
+                        <p>
+                            Enter customer information below.
+                        </p>
+                    </div>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    data-close-modal="customerModal"
+                    aria-label="Close"
+                >
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+            </div>
+
+
+            <form id="customerForm">
+
+                <input
+                    type="hidden"
+                    id="customerId"
+                >
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="customerName">
+                            Full Name
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="customerName"
+                            placeholder="Enter full name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="customerPhone">
+                            Phone Number
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="customerPhone"
+                            placeholder="Enter phone number"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="customerEmail">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="customerEmail"
+                        placeholder="Enter email address"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="customerAddress">
+                        Address
+                    </label>
+
+                    <textarea
+                        id="customerAddress"
+                        rows="3"
+                        placeholder="Enter customer address"
+                    ></textarea>
+
+                </div>
+
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="secondary-btn"
+                        data-close-modal="customerModal"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="primary-btn"
+                    >
+                        <i class="fa-solid fa-save"></i>
+                        Save Customer
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================================
+         VEHICLE MODAL
+    ========================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="vehicleModal"
+        aria-hidden="true"
+    >
+
+        <div class="modal">
+
+            <div class="modal-header">
+
+                <div>
+
+                    <div class="modal-icon vehicle-modal-icon">
+                        <i class="fa-solid fa-car-side"></i>
+                    </div>
+
+                    <div>
+
+                        <h3 id="vehicleModalTitle">
+                            Add Vehicle
+                        </h3>
+
+                        <p>
+                            Enter vehicle information below.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    data-close-modal="vehicleModal"
+                    aria-label="Close"
+                >
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+            </div>
+
+
+            <form id="vehicleForm">
+
+                <input
+                    type="hidden"
+                    id="vehicleId"
+                >
+
+
+                <div class="form-group">
+
+                    <label for="vehicleOwner">
+                        Vehicle Owner
+                        <span>*</span>
+                    </label>
+
+                    <select
+                        id="vehicleOwner"
+                        required
+                    >
+
+                        <option value="">
+                            Select customer
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="vehicleRegistration">
+                            Registration Number
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="vehicleRegistration"
+                            placeholder="e.g. KL 01 AB 1234"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="vehicleType">
+                            Vehicle Type
+                            <span>*</span>
+                        </label>
+
+                        <select
+                            id="vehicleType"
+                            required
+                        >
+
+                            <option value="">
+                                Select type
+                            </option>
+
+                            <option value="Car">
+                                Car
+                            </option>
+
+                            <option value="Bike">
+                                Bike
+                            </option>
+
+                            <option value="Scooter">
+                                Scooter
+                            </option>
+
+                            <option value="SUV">
+                                SUV
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="vehicleBrand">
+                            Brand
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="vehicleBrand"
+                            placeholder="e.g. Toyota"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="vehicleModel">
+                            Model
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="vehicleModel"
+                            placeholder="e.g. Innova"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="vehicleYear">
+                            Manufacturing Year
+                        </label>
+
+                        <input
+                            type="number"
+                            id="vehicleYear"
+                            min="1950"
+                            max="2100"
+                            placeholder="e.g. 2023"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="vehicleColor">
+                            Color
+                        </label>
+
+                        <input
+                            type="text"
+                            id="vehicleColor"
+                            placeholder="e.g. White"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="secondary-btn"
+                        data-close-modal="vehicleModal"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="primary-btn"
+                    >
+                        <i class="fa-solid fa-save"></i>
+                        Save Vehicle
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================================
+         SERVICE BOOKING MODAL
+    ========================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="serviceModal"
+        aria-hidden="true"
+    >
+
+        <div class="modal modal-large">
+
+            <div class="modal-header">
+
+                <div>
+
+                    <div class="modal-icon service-modal-icon">
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                    </div>
+
+                    <div>
+
+                        <h3 id="serviceModalTitle">
+                            New Service Booking
+                        </h3>
+
+                        <p>
+                            Create a vehicle service appointment.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    data-close-modal="serviceModal"
+                    aria-label="Close"
+                >
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+            </div>
+
+
+            <form id="serviceForm">
+
+                <input
+                    type="hidden"
+                    id="serviceId"
+                >
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="serviceCustomer">
+                            Customer
+                            <span>*</span>
+                        </label>
+
+                        <select
+                            id="serviceCustomer"
+                            required
+                        >
+
+                            <option value="">
+                                Select customer
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="serviceVehicle">
+                            Vehicle
+                            <span>*</span>
+                        </label>
+
+                        <select
+                            id="serviceVehicle"
+                            required
+                        >
+
+                            <option value="">
+                                Select vehicle
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="serviceType">
+                            Service Type
+                            <span>*</span>
+                        </label>
+
+                        <select
+                            id="serviceType"
+                            required
+                        >
+
+                            <option value="">
+                                Select service
+                            </option>
+
+                            <option value="General Service">
+                                General Service
+                            </option>
+
+                            <option value="Oil Change">
+                                Oil Change
+                            </option>
+
+                            <option value="Engine Repair">
+                                Engine Repair
+                            </option>
+
+                            <option value="Brake Service">
+                                Brake Service
+                            </option>
+
+                            <option value="AC Service">
+                                AC Service
+                            </option>
+
+                            <option value="Battery Replacement">
+                                Battery Replacement
+                            </option>
+
+                            <option value="Tyre Service">
+                                Tyre Service
+                            </option>
+
+                            <option value="Wheel Alignment">
+                                Wheel Alignment
+                            </option>
+
+                            <option value="Full Service">
+                                Full Service
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="serviceDate">
+                            Service Date
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="date"
+                            id="serviceDate"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="serviceMechanic">
+                            Assigned Mechanic
+                        </label>
+
+                        <input
+                            type="text"
+                            id="serviceMechanic"
+                            placeholder="Mechanic name"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="serviceCost">
+                            Estimated Cost
+                        </label>
+
+                        <div class="input-with-symbol">
+
+                            <span>₹</span>
+
+                            <input
+                                type="number"
+                                id="serviceCost"
+                                min="0"
+                                step="0.01"
+                                placeholder="0.00"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="serviceStatus">
+                            Status
+                        </label>
+
+                        <select id="serviceStatus">
+
+                            <option value="booked">
+                                Booked
+                            </option>
+
+                            <option value="in-service">
+                                In Service
+                            </option>
+
+                            <option value="completed">
+                                Completed
+                            </option>
+
+                            <option value="delivered">
+                                Delivered
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="serviceMileage">
+                            Current Mileage
+                        </label>
+
+                        <input
+                            type="number"
+                            id="serviceMileage"
+                            min="0"
+                            placeholder="e.g. 45000"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="serviceNotes">
+                        Service Notes
+                    </label>
+
+                    <textarea
+                        id="serviceNotes"
+                        rows="4"
+                        placeholder="Describe the issue, requested work or additional notes..."
+                    ></textarea>
+
+                </div>
+
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="secondary-btn"
+                        data-close-modal="serviceModal"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="primary-btn"
+                    >
+                        <i class="fa-solid fa-calendar-check"></i>
+                        Save Booking
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================================
+         VIEW SERVICE MODAL
+    ========================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="viewServiceModal"
+        aria-hidden="true"
+    >
+
+        <div class="modal">
+
+            <div class="modal-header">
+
+                <div>
+
+                    <div class="modal-icon service-modal-icon">
+                        <i class="fa-solid fa-file-lines"></i>
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Service Details
+                        </h3>
+
+                        <p>
+                            Complete booking information.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    data-close-modal="viewServiceModal"
+                    aria-label="Close"
+                >
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+            </div>
+
+
+            <div
+                class="service-details"
+                id="serviceDetailsContent"
+            >
+
+                <!-- JavaScript inserts details here -->
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="secondary-btn"
+                    data-close-modal="viewServiceModal"
+                >
+                    Close
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================================
+         CONFIRMATION MODAL
+    ========================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="confirmModal"
+        aria-hidden="true"
+    >
+
+        <div class="modal confirm-modal">
+
+            <div class="confirm-icon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+
+            <h3 id="confirmTitle">
+                Are you sure?
+            </h3>
+
+            <p id="confirmMessage">
+                This action cannot be undone.
+            </p>
+
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="secondary-btn"
+                    id="confirmCancelBtn"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="button"
+                    class="danger-btn"
+                    id="confirmOkBtn"
+                >
+                    Confirm
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================================
+         TOAST NOTIFICATION
+    ========================================================== -->
+
+    <div
+        class="toast-container"
+        id="toastContainer"
+    >
+
+        <!-- JavaScript generates notifications here -->
+
+    </div>
+
+
+
+    <!-- =========================================================
+         MOBILE OVERLAY
+    ========================================================== -->
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+    ></div>
+
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================== -->
+
+    <script src="script.js"></script>
+    
+</body>
+</html>
